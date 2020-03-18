@@ -18,6 +18,7 @@ DB.create_table! :users do
   String :name
   String :email
   String :password
+  String :phone
 end
 DB.create_table! :awards do
   primary_key :id

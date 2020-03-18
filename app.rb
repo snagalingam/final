@@ -24,7 +24,10 @@ before do
     @current_user = users_table.where(id: session["user_id"]).to_a[0]
 end
 
-#### USER INFORMATION
+#### TWILIO
+account_sid = ENV["TWILIO_ACCOUNT_SID"]
+auth_token = ENV["TWILIO_AUTH_TOKEN"]
+client = Twilio::REST::Client.new(account_sid, auth_token)
 
 # homepage displays the signup form (aka "new")
 get "/" do
@@ -42,6 +45,12 @@ post "/users/create" do
           name: params["name"],
           email: params["email"],
           password: BCrypt::Password.create(params["password"])
+      )
+
+      client.messages.create(
+        from: "+12057363958",
+        to: params["phone"],
+        body: "Welcome to our service!"
       )
 
       session["user_id"] = users_table.where(email: params["email"]).to_a[0][:id]
