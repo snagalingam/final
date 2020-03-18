@@ -119,6 +119,12 @@ post "/colleges/:id/awards/create" do
         work_study: params["work_study"]
     )
 
+    location = @college[:city] + ", " + @college[:state]
+    results = Geocoder.search(location)
+    lat_long = results.first.coordinates
+    @lat = lat_long[0]
+    @long = lat_long[1]
+
     @award = awards_table.where(college_id: @college[:id]).where(user_id: session["user_id"]).to_a[0]
     view "college"
 end
@@ -141,6 +147,12 @@ post "/awards/:id/update" do
         work_study: params["work_study"]
       )
 
+      location = @college[:city] + ", " + @college[:state]
+      results = Geocoder.search(location)
+      lat_long = results.first.coordinates
+      @lat = lat_long[0]
+      @long = lat_long[1]
+
       @award = awards_table.where(id: params["id"]).to_a[0]
       view "college"
     else
@@ -152,6 +164,13 @@ end
 get "/awards/:id/destroy" do
     award = awards_table.where(id: params["id"]).to_a[0]
     @college = colleges_table.where(id: award[:college_id]).to_a[0]
+
+    location = @college[:city] + ", " + @college[:state]
+    results = Geocoder.search(location)
+    lat_long = results.first.coordinates
+    @lat = lat_long[0]
+    @long = lat_long[1]
+
     awards_table.where(id: params["id"]).delete
     view "college"
 end
