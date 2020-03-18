@@ -13,13 +13,47 @@
       <p>Room & Meals: <%= @college[:room_meals] %></p>
     </div>
 
-    <iframe
-      width="600"
-      height="450"
-      frameborder="0" style="border:0"
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
-        &q=<%= @lat %>,<%= @long %>&zoom=6" allowfullscreen>
-    </iframe>
+    <div class="row">
+      <div class="container-fluid">
+        <% if @current_user && @award %>
+          <div class="row">
+            <h3>Award</h3>
+          </div>
+
+          <div class="row">
+            <p>
+              (<a href="/awards/<%= @award[:id] %>/edit">edit</a> | <a href="/awards/<%= @award[:id] %>/destroy">delete</a>)
+            </p>
+          </div>
+
+          <div class="row">
+            <p>Grants: <%= @award[:grants] %></p>
+          </div>
+
+          <div class="row">
+            <p>Loans: <%= @award[:loans] %></p>
+          </div>
+
+          <div class="row">
+            <p>Work-Study: <%= @award[:work_study] %></p>
+          </div>
+        <% else %>
+          <form class="mb-6" action="/colleges/<%= @college[:id] %>/awards/new" method="get">
+            <button type="submit" class="btn btn-primary">Add Award Data</button>
+          </form>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="row mt-2">
+      <iframe
+        width="600"
+        height="450"
+        frameborder="0" style="border:0"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
+          &q=<%= @lat %>,<%= @long %>&zoom=6" allowfullscreen>
+      </iframe>
+    </div>
 
   </div>
 </section>

@@ -89,5 +89,65 @@ get "/colleges/:id" do
     @lat = lat_long[0]
     @long = lat_long[1]
 
+    @award = awards_table.where(college_id: @college[:id]).where(user_id: session["user_id"]).to_a[0]
+
+    view "college"
+end
+
+
+#### AWARD INFORMATION
+
+# display the award form (aka "new")
+get "/colleges/:id/awards/new" do
+    @college = colleges_table.where(id: params[:id]).to_a[0]
+    view "new_award"
+end
+
+# receive the submitted award form (aka "create")
+post "/colleges/:id/awards/create" do
+    @college = colleges_table.where(id: params[:id]).to_a[0]
+
+    awards_table.insert(
+        college_id: @college[:id],
+        user_id: session["user_id"],
+        grants: params["grants"],
+        loans: params["loans"],
+        work_study: params["work_study"]
+    )
+
+    @award = awards_table.where(college_id: @college[:id]).where(user_id: session["user_id"]).to_a[0]
+    view "college"
+end
+
+# edit the submitted award form
+get "/awards/:id/edit" do
+    @award = awards_table.where(id: params["id"]).to_a[0]
+    @college = colleges_table.where(id: @award[:college_id]).to_a[0]
+    view "edit_award"
+end
+
+# update the data once edited
+post "/awards/:id/update" do
+    award = awards_table.where(id: params["id"]).to_a[0]
+    @college = colleges_table.where(id: award[:college_id]).to_a[0]
+    if @current_user && @current_user[:id] == award[:user_id]
+      awards_table.where( id: award[:id]).update(
+        grants: params["grants"],
+        loans: params["loans"],
+        work_study: params["work_study"]
+      )
+
+      @award = awards_table.where(id: params["id"]).to_a[0]
+      view "college"
+    else
+      view "error"
+    end
+end
+
+# destroy the submitted award form
+get "/awards/:id/destroy" do
+    award = awards_table.where(id: params["id"]).to_a[0]
+    @college = colleges_table.where(id: award[:college_id]).to_a[0]
+    awards_table.where(id: params["id"]).delete
     view "college"
 end

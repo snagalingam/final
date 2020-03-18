@@ -1,0 +1,39 @@
+<section>
+  <div class="container-fluid">
+    <h1>Award for <%= @college[:name] %></h1>
+
+    <!-- Form -->
+    <form class="mb-6" action="/colleges/<%= @college[:id] %>/awards/create" method="post">
+
+      <!-- Grants -->
+      <div class="form-group">
+        <label for="grants">
+          Total Grants
+        </label>
+        <input type="text" class="form-control" name="grants" placeholder="Enter total amount of grants received">
+      </div>
+
+      <!-- Loans -->
+      <div class="form-group">
+        <label for="loans">
+          Loans
+        </label>
+        <input type="text" class="form-control" name="loans" placeholder="Enter total amount of loans received">
+      </div>
+
+      <!-- Work-Study -->
+      <div class="form-group mb-5">
+        <label for="work_study">
+          Work-Study
+        </label>
+        <input type="text" class="form-control" name="work_study" placeholder="Enter work-study amount received">
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-block btn-primary" type="submit">
+        Submit
+      </button>
+
+    </form>
+  </div>
+</section>

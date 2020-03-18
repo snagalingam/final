@@ -1,0 +1,39 @@
+<section>
+  <div class="container-fluid">
+    <h1>Edit Award for <%= @college[:name] %></h1>
+
+    <!-- Form -->
+    <form class="mb-6" action="/awards/<%= @award[:id] %>/update" method="post">
+
+      <!-- Grants -->
+      <div class="form-group">
+        <label for="grants">
+          Total Grants
+        </label>
+        <textarea type="text" class="form-control" name="grants"><%= @award[:grants] %></textarea>
+      </div>
+
+      <!-- Loans -->
+      <div class="form-group">
+        <label for="loans">
+          Loans
+        </label>
+        <textarea type="text" class="form-control" name="loans"><%= @award[:loans] %></textarea>
+      </div>
+
+      <!-- Work-Study -->
+      <div class="form-group mb-5">
+        <label for="work_study">
+          Work-Study
+        </label>
+        <textarea type="text" class="form-control" name="work_study"><%= @award[:work_study] %></textarea>
+      </div>
+
+      <!-- Submit -->
+      <button class="btn btn-block btn-primary" type="submit">
+        Submit
+      </button>
+
+    </form>
+  </div>
+</section>
