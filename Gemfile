@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'geocoder'
 gem 'sequel'
 group :development do
     gem 'sqlite3'
