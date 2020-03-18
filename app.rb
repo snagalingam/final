@@ -78,6 +78,10 @@ get "/logout" do
 end
 
 #### COLLEGE INFORMATION
+get "/colleges" do
+    @colleges = colleges_table
+    view "colleges"
+end
 
 # college details (aka "show")
 get "/colleges/:id" do
