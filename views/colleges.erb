@@ -1,0 +1,15 @@
+<section>
+  <div class="container-fluid">
+
+    <div class="row">
+      <h1>All Colleges</h1>
+    </div>
+
+    <% for college in @colleges %>
+      <div class="row">
+        <p><a href="/colleges/<%= college[:id] %>"><%= college[:name] %></a></p>
+      </div>
+    <% end %>
+
+  </div>
+</section>

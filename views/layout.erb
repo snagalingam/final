@@ -8,19 +8,42 @@
     <!-- Google Fonts -->
     <!-- Swap out "Roboto" for the font(s) you want to use -->
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css" crossorigin="anonymous">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
-    
+
     <!-- Your own CSS -->
     <link rel="stylesheet" href="/styles.css">
 
     <title>Hello world!</title>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <h2>Tilt</h2>
+            <ul class="navbar-nav ml-auto">
+                <% if @current_user %>
+                    <li class="navbar-text">
+                        Logged in as <%= @current_user[:name] %>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </li>
+                <% else %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logins/new">Sign In</a>
+                    </li>
+                <% end %>
+            </ul>
+        </div>
+    </nav>
 
     <div class="container mt-5">
       <%= yield %>

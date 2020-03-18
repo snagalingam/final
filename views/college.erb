@@ -1,0 +1,25 @@
+<section>
+  <div class="container-fluid">
+
+    <div class="row">
+      <h1><%= @college[:name] %></h1>
+    </div>
+
+    <div class="row pt-2">
+      <p>Tuition & Fees: <%= @college[:tuition_fees] %></p>
+    </div>
+
+    <div class="row">
+      <p>Room & Meals: <%= @college[:room_meals] %></p>
+    </div>
+
+    <iframe
+      width="600"
+      height="450"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw
+        &q=<%= @lat %>,<%= @long %>&zoom=6" allowfullscreen>
+    </iframe>
+
+  </div>
+</section>
